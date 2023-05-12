@@ -2,14 +2,8 @@
 #include <stdbool.h>
 #define N 100
 
-int Set_String(char str[])
-{
-    
-    char ch,i=0;
-    while((ch = getchar()) != '\n') str[i++]=ch;
-    str[i]='\0';
-    return i-1;
-}
+FILE *fp1; FILE *fp2;
+
 
 int Search(char str[],int n, char var)
 {
@@ -23,21 +17,43 @@ int Search(char str[],int n, char var)
 
 int main()
 {
-    char str[N];
-    printf("Enter your text : ");
-    int size = Set_String(str);
+	
+	fp1 = fopen("file_IO.txt","a");
+	
+    fprintf(fp1,"Enter your text : ");
+	fclose(fp1);
+	fp1 = fopen("file_IO.txt","a");
+    char ch;
+     while( (ch = getchar()) != EOF) {
+        putc(ch, fp1);
+    }
+	fclose(fp1);
+    int size = 4;
+
     
     char var;
-    printf("Enter character to search : ");
-    scanf("%c",&var);
+	fp1 = fopen("file_IO.txt","a");
+    fprintf(fp1,"Enter character to search : ");
+	fclose(fp1);
+	fp1 = fopen("file_IO.txt","a");
+	var = fgetc(fp1);
+	fclose(fp1);
     
     int loc = Search(str,size,var);
     
     if(loc >= 0 && loc < size)
-        printf("'%c' is found at index %d",var,loc);
+	{
+		fp1 = fopen("file_IO.txt","a");
+        fprintf(fp2,"'%c' is found at index %d",var,loc);
+	    fclose(fp1);
+	}
     else 
-        printf("'%c' is not found",var);
+	{
+		fp1 = fopen("file_IO.txt","a");
+        fprintf(fp2,"'%c' is not found",var);
+		fclose(fp1);
+	}
     
-  
+ 
     return 0;
 }
