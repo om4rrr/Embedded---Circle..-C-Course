@@ -63,6 +63,7 @@ int ValidateNumber(){
     char *temp;
     do{
 		temp = SetString();
+		if(!strcmp(temp,"-1")) return -1;
 		num = StringToInt(temp);
     } while ( num == -1 && printf("\nInvalid Number, Try again..\n\nEnter Number : "));
     return num;
